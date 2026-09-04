@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png" href="favicon.png" />
+        <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+        <title>Blog — Siddharth C</title>
+        <meta
+            name="description"
+            content="Blog and notes by Siddharth C on AI engineering, machine learning, RAG, model evaluation, and building intelligent products."
+        />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Siddharth C" />
+        <link rel="canonical" href="https://siddharthc.dev/blog.html" />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Blog — Siddharth C" />
+        <meta
+            property="og:description"
+            content="Blog and notes by Siddharth C on AI engineering, machine learning, RAG, model evaluation, and building intelligent products."
+        />
+        <meta
+            property="og:image"
+            content="apple-touch-icon.png"
+        />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+        />
+
+        <script>
+            if (sessionStorage.getItem("fromIndexToBlog") === "true") {
+                document.documentElement.classList.add("from-index");
+                sessionStorage.removeItem("fromIndexToBlog");
+            }
+        </script>
+
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+
+    <body>
+        <header class="site-header">
+            <nav class="nav shell" aria-label="Primary navigation">
+                <a href="index.html" class="brand" aria-label="Home">
+                    <span class="brand-mark" aria-hidden="true">
+                        <img
+                            src="assets/brand-logo.webp"
+                            alt="Siddharth C"
+                            width="38"
+                            height="38"
+                            loading="eager"
+                        />
+                    </span>
+                    <span>Siddharth C</span>
+                </a>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html#skills">Stack</a></li>
+                    <li><a href="index.html#leetcode">LeetCode</a></li>
+                    <li><a href="index.html#interests">Interests</a></li>
+                    <li><a class="active" href="blog.html">Blog</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <a class="resume-mini" href="files/siddharth-c-resume.pdf" download="Siddharth-C-Resume.pdf"
+                        >Resume ↓</a
+                    >
+
+                    <button
+                        class="menu-button"
+                        id="menuButton"
+                        type="button"
+                        aria-expanded="false"
+                        aria-controls="navLinks"
+                    >
+                        Menu
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <section class="blog-hero">
+                <div class="shell">
+                    <h1>Notes from building <span>AI systems.</span></h1>
+
+                    <p class="blog-intro">
+                        Short writeups on machine learning experiments, RAG
+                        systems, model evaluation, debugging datasets, and
+                        turning notebooks into useful software.
+                    </p>
+                </div>
+            </section>
+
+            <section class="featured">
+                <div class="shell">
+                    <article class="featured-card">
+                        <div>
+                            <span class="post-label">Featured Note</span>
+
+                            <h2>
+                                Can AI Understand Tanglish?
+                            </h2>
+
+                            <p>
+                                Exploring Tamil-English code switching: how conversational AI architectures parse mixed Latin and native scripts to bridge regional communication gaps.
+                            </p>
+
+                            <div class="featured-meta">
+                                <span class="tag">NLP</span>
+                                <span class="tag">Tanglish</span>
+                                <span class="tag">Code-Switching</span>
+                                <span class="tag">Conversational AI</span>
+                            </div>
+
+                            <a
+                                class="read-link"
+                                href="#"
+                                >Read article</a
+                            >
+                        </div>
+
+                        <div class="featured-visual" aria-hidden="true"></div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="blog-section">
+                <div class="shell">
+                    <div class="section-top">
+                        <div>
+                            <p class="kicker">All Notes</p>
+                            <h2>Latest writing.</h2>
+                        </div>
+
+                        <div class="filter-row" aria-label="Blog categories">
+                            <span class="filter active">All</span>
+                            <span class="filter">AI</span>
+                            <span class="filter">ML</span>
+                            <span class="filter">NLP</span>
+                            <span class="filter">Build Logs</span>
+                        </div>
+                    </div>
+
+                    <div class="blog-grid">
+                        <article class="post">
+                            <div>
+                                <time datetime="2026-08-18">Aug 18, 2026</time>
+                                <h3>
+                                    Can AI Understand Tanglish?
+                                </h3>
+                                <p>
+                                    Exploring Tamil-English code switching: investigating tokenization challenges, mixed script semantics, and how models handle transliterated colloquial expressions.
+                                </p>
+                            </div>
+
+                            <div class="post-footer">
+                                <a
+                                    class="read-link"
+                                    href="#"
+                                    >Read note</a
+                                >
+                                <strong class="post-number">01</strong>
+                            </div>
+                        </article>
+
+                        <article class="post">
+                            <div>
+                                <time datetime="2026-05-24">May 24, 2026</time>
+                                <h3>
+                                    Building Documind: Document Intelligence Without Heavy LLMs
+                                </h3>
+                                <p>
+                                    How to leverage scikit-learn pipelines, TF-IDF vector search,
+                                    and PyMuPDF to extract, classify, and search complex documents cleanly.
+                                </p>
+                            </div>
+
+                            <div class="post-footer">
+                                <a
+                                    class="read-link"
+                                    href="#"
+                                    >Read note</a
+                                >
+                                <strong class="post-number">02</strong>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="newsletter">
+                <div class="shell">
+                    <div class="newsletter-card">
+                        <h2>Want build notes?</h2>
+
+                        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
+                            <input
+                                type="email"
+                                placeholder="your@email.com"
+                                aria-label="Email address"
+                                required
+                            />
+                            <button type="submit">Notify me</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="shell">
+                <p>© <span id="year"></span> Built by Siddharth C</p>
+                <p>Intelligent Systems · Python & ML</p>
+            </div>
+        </footer>
+
+        <script>
+            const menuButton = document.getElementById("menuButton");
+            const navLinks = document.getElementById("navLinks");
+
+            menuButton.addEventListener("click", () => {
+                const isOpen = navLinks.classList.toggle("open");
+                menuButton.setAttribute("aria-expanded", String(isOpen));
+                menuButton.textContent = isOpen ? "Close" : "Menu";
+            });
+
+            navLinks.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", () => {
+                    navLinks.classList.remove("open");
+                    menuButton.setAttribute("aria-expanded", "false");
+                    menuButton.textContent = "Menu";
+                });
+            });
+
+            document.getElementById("year").textContent =
+                new Date().getFullYear();
+
+            const indexLinks = document.querySelectorAll(
+                'a[href^="index.html"]',
+            );
+            const prefersReducedMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)",
+            ).matches;
+
+            if (!prefersReducedMotion) {
+                indexLinks.forEach((indexLink) => {
+                    indexLink.addEventListener("click", (event) => {
+                        if (
+                            event.metaKey ||
+                            event.ctrlKey ||
+                            event.shiftKey ||
+                            event.altKey ||
+                            event.button !== 0
+                        ) {
+                            return;
+                        }
+
+                        event.preventDefault();
+                        sessionStorage.setItem("fromBlogToIndex", "true");
+                        document.body.classList.add("page-exit");
+
+                        window.setTimeout(() => {
+                            window.location.href = indexLink.href;
+                        }, 420);
+                    });
+                });
+
+                if (document.documentElement.classList.contains("from-index")) {
+                    requestAnimationFrame(() => {
+                        document.documentElement.classList.add("page-entered");
+                    });
+                }
+            }
+
+            window.addEventListener("pageshow", () => {
+                if (!prefersReducedMotion) {
+                    requestAnimationFrame(() => {
+                        document.body.classList.remove("page-exit");
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
