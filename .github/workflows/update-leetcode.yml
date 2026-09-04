@@ -1,0 +1,42 @@
+name: Sync LeetCode Stats
+
+on:
+  schedule:
+    # Runs automatically every day at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows manual one-click trigger anytime from GitHub Actions tab
+  push:
+    paths:
+      - 'scripts/sync_leetcode.py'
+      - '.github/workflows/update-leetcode.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch latest LeetCode stats
+        run: python scripts/sync_leetcode.py
+
+      - name: Commit and push changes if updated
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/leetcode.json
+          if git diff --staged --quiet; then
+            echo "No changes detected in LeetCode statistics."
+          else
+            git commit -m "chore(data): sync latest LeetCode stats [skip ci]"
+            git push
+          fi
