@@ -1083,14 +1083,17 @@
                 const track = document.getElementById("lcScrollTrack");
                 const btnLeft = document.getElementById("lcScrollLeft");
                 const btnRight = document.getElementById("lcScrollRight");
+                const scrollBarWrap = document.querySelector(".lc-scroll-bar-wrap");
 
                 function updateThumb() {
                     const maxScroll = container.scrollWidth - container.clientWidth;
-                    if (maxScroll <= 0) {
+                    if (maxScroll <= 2) {
+                        if (scrollBarWrap) scrollBarWrap.style.display = "none";
                         thumb.style.width = "100%";
                         thumb.style.left = "0%";
                         return;
                     }
+                    if (scrollBarWrap) scrollBarWrap.style.display = "flex";
                     const visibleRatio = container.clientWidth / container.scrollWidth;
                     const thumbWidthPct = Math.max(20, visibleRatio * 100);
                     const scrollPct = container.scrollLeft / maxScroll;
