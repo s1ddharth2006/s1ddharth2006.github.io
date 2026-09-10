@@ -7,7 +7,7 @@ window.LEETCODE_STATIC_DATA = {
   "hardSolved": 0,
   "ranking": 2003980,
   "activeDays": 28,
-  "lastUpdated": "2026-09-10T12:59:37Z",
+  "lastUpdated": "2026-09-10T13:03:57Z",
   "submissionCalendar": {
     "1768867200": 14,
     "1768953600": 24,
