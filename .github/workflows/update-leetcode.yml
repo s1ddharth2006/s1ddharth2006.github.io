@@ -37,7 +37,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes detected in LeetCode statistics."
           else
-            git commit -m "chore(data): sync latest LeetCode stats [skip ci]"
+            git commit -m "chore(data): sync latest LeetCode stats"
             git pull --rebase origin main || true
             git push
           fi
