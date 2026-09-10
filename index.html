@@ -171,7 +171,7 @@
                                 >View Projects</a
                             >
                             <a class="button button-ghost" href="#leetcode"
-                                >LeetCode Submissions (77)</a
+                                >LeetCode Submissions (<span id="lcHeroSolved">78</span>)</a
                             >
                         </div>
                     </div>
@@ -286,7 +286,7 @@
                             </p>
                             <p>
                                 When I'm not writing ML pipelines or designing cloud APIs with FastAPI and Firestore,
-                                I solve algorithmic challenges on LeetCode (<strong>77+ solved</strong> as <em>Programmer_Sid</em>),
+                                I solve algorithmic challenges on LeetCode (<strong id="lcAboutSolved">78+ solved</strong> as <em>Programmer_Sid</em>),
                                 explore new architectures, and contribute to open-source software.
                             </p>
                         </div>
@@ -615,7 +615,7 @@
                                 </p>
 
                                 <div class="leetcode-metric-hero">
-                                    <span class="leetcode-big-num" id="lcTotal">77</span>
+                                    <span class="leetcode-big-num" id="lcTotal">78</span>
                                     <span class="leetcode-big-label">Problems Solved</span>
                                 </div>
                             </div>
@@ -645,10 +645,10 @@
                                         <div
                                             class="diff-bar-fill easy"
                                             id="lcEasyBar"
-                                            style="width: 85%"
+                                            style="width: 86%"
                                         ></div>
                                     </div>
-                                    <span class="diff-count" id="lcEasyCount">68</span>
+                                    <span class="diff-count" id="lcEasyCount">69</span>
                                 </div>
 
                                 <div class="difficulty-row">
@@ -657,7 +657,7 @@
                                         <div
                                             class="diff-bar-fill medium"
                                             id="lcMediumBar"
-                                            style="width: 45%"
+                                            style="width: 36%"
                                         ></div>
                                     </div>
                                     <span class="diff-count" id="lcMediumCount">9</span>
@@ -703,7 +703,7 @@
                                 <h3 class="lc-card-title">LeetCode Submissions</h3>
                             </div>
                             <div class="lc-card-meta">
-                                <span id="lcActiveDays">26 active days</span>
+                                <span id="lcActiveDays">28 active days</span>
                                 <span>·</span>
                                 <span>Past year activity</span>
                             </div>
@@ -881,6 +881,7 @@
         <!-- Heatmap Floating Tooltip -->
         <div class="lc-tooltip" id="lcTooltip"></div>
 
+        <script src="data/leetcode-data.js"></script>
         <script>
             const menuButton = document.getElementById("menuButton");
             const navLinks = document.getElementById("navLinks");
@@ -1015,7 +1016,7 @@
                 "1786838400": 1,  "1786924800": 3,  "1787097600": 6,  "1787184000": 26,
                 "1787356800": 4,  "1787702400": 15, "1787788800": 24, "1787875200": 1,
                 "1787961600": 9,  "1788134400": 18, "1788220800": 15, "1788307200": 19,
-                "1788393600": 2,  "1788480000": 3
+                "1788393600": 2,  "1788480000": 3,  "1788566400": 2,  "1788825600": 4
             };
 
             function renderLeetCodeHeatmap(calData) {
@@ -1030,8 +1031,11 @@
                     dateCountMap[ymd] = (dateCountMap[ymd] || 0) + count;
                 }
 
-                // Render 52 weeks (364 days), ending on the end of current week
-                const endDate = new Date(Date.UTC(2026, 8, 5));
+                // Render 52 full weeks (364 days), ending on the upcoming Saturday of current week
+                const now = new Date();
+                const dayOfWeek = now.getUTCDay(); // 0 is Sunday, 6 is Saturday
+                const daysUntilSaturday = 6 - dayOfWeek;
+                const endDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + daysUntilSaturday));
                 const totalDays = 52 * 7;
                 const startDate = new Date(endDate.getTime() - (totalDays - 1) * 86400000);
                 const tooltip = document.getElementById("lcTooltip");
@@ -1162,40 +1166,96 @@
                 });
             }
 
-            // Initialize heatmap
+            // Apply unified data payload to all DOM elements and heatmap
+            function applyLeetCodeData(data) {
+                if (!data || data.totalSolved === undefined) return;
+
+                const totalEl = document.getElementById("lcTotal");
+                if (totalEl) totalEl.textContent = data.totalSolved;
+
+                const heroEl = document.getElementById("lcHeroSolved");
+                if (heroEl) heroEl.textContent = data.totalSolved;
+
+                const aboutEl = document.getElementById("lcAboutSolved");
+                if (aboutEl) aboutEl.textContent = `${data.totalSolved}+ solved`;
+
+                const easyEl = document.getElementById("lcEasyCount");
+                if (easyEl) easyEl.textContent = data.easySolved;
+
+                const medEl = document.getElementById("lcMediumCount");
+                if (medEl) medEl.textContent = data.mediumSolved;
+
+                const hardEl = document.getElementById("lcHardCount");
+                if (hardEl) hardEl.textContent = data.hardSolved;
+
+                const easyPct = Math.min(100, Math.round((data.easySolved / 80) * 100));
+                const medPct = Math.min(100, Math.round((data.mediumSolved / 25) * 100));
+                const hardPct = Math.min(100, Math.round((data.hardSolved / 10) * 100));
+
+                const easyBar = document.getElementById("lcEasyBar");
+                if (easyBar) easyBar.style.width = easyPct + "%";
+
+                const medBar = document.getElementById("lcMediumBar");
+                if (medBar) medBar.style.width = medPct + "%";
+
+                const hardBar = document.getElementById("lcHardBar");
+                if (hardBar) hardBar.style.width = hardPct + "%";
+
+                let activeDays = data.activeDays;
+                let cal = data.submissionCalendar;
+                if (typeof cal === "string") {
+                    try { cal = JSON.parse(cal); } catch (e) {}
+                }
+                if (!activeDays && cal) {
+                    activeDays = Object.keys(cal).length;
+                }
+                const activeDaysEl = document.getElementById("lcActiveDays");
+                if (activeDaysEl && activeDays) {
+                    activeDaysEl.textContent = `${activeDays} active days`;
+                }
+
+                if (cal && Object.keys(cal).length > 0) {
+                    renderLeetCodeHeatmap(cal);
+                }
+            }
+
+            // 1. Initialize immediately with embedded dataset
             renderLeetCodeHeatmap(leetcodeCalendar);
 
-            // Sync with automated data/leetcode.json (maintained by GitHub Actions workflow)
+            // 2. Multi-layer live synchronization
             (async function syncLeetCodeData() {
+                // Tier A: Check if static JS data exists (works even via file:/// protocol)
+                if (window.LEETCODE_STATIC_DATA) {
+                    applyLeetCodeData(window.LEETCODE_STATIC_DATA);
+                }
+
+                // Tier B: Fetch local data/leetcode.json (cached GitHub Actions output)
                 try {
                     const res = await fetch("data/leetcode.json?t=" + Date.now());
-                    if (!res.ok) return;
-                    const data = await res.json();
-                    if (data && data.totalSolved !== undefined) {
-                        document.getElementById("lcTotal").textContent = data.totalSolved;
-                        document.getElementById("lcEasyCount").textContent = data.easySolved;
-                        document.getElementById("lcMediumCount").textContent = data.mediumSolved;
-                        document.getElementById("lcHardCount").textContent = data.hardSolved;
-                        
-                        const easyPct = Math.min(100, Math.round((data.easySolved / 80) * 100));
-                        const medPct = Math.min(100, Math.round((data.mediumSolved / 25) * 100));
-                        const hardPct = Math.min(100, Math.round((data.hardSolved / 10) * 100));
-                        
-                        document.getElementById("lcEasyBar").style.width = easyPct + "%";
-                        document.getElementById("lcMediumBar").style.width = medPct + "%";
-                        document.getElementById("lcHardBar").style.width = hardPct + "%";
+                    if (res.ok) {
+                        const localData = await res.json();
+                        applyLeetCodeData(localData);
+                    }
+                } catch (e) {
+                    // Falls back gracefully on file:/// or network drop
+                }
 
-                        const activeDaysEl = document.getElementById("lcActiveDays");
-                        if (data.activeDays && activeDaysEl) {
-                            activeDaysEl.textContent = `${data.activeDays} active days`;
-                        }
-
-                        if (data.submissionCalendar && Object.keys(data.submissionCalendar).length > 0) {
-                            renderLeetCodeHeatmap(data.submissionCalendar);
+                // Tier C: Fetch live real-time stats directly from public CORS API
+                try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 5000);
+                    const liveRes = await fetch("https://leetcode-api-faisalshohag.vercel.app/Programmer_Sid", {
+                        signal: controller.signal
+                    });
+                    clearTimeout(timeoutId);
+                    if (liveRes.ok) {
+                        const liveData = await liveRes.json();
+                        if (liveData && liveData.totalSolved) {
+                            applyLeetCodeData(liveData);
                         }
                     }
                 } catch (e) {
-                    // Gracefully falls back to initial embedded data
+                    // Gracefully keep cached data if external API is unreachable
                 }
             })();
         </script>
