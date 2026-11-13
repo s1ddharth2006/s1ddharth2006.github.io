@@ -5,9 +5,9 @@ window.LEETCODE_STATIC_DATA = {
   "easySolved": 93,
   "mediumSolved": 21,
   "hardSolved": 3,
-  "ranking": 1503853,
-  "activeDays": 46,
-  "lastUpdated": "2026-11-12T04:40:12Z",
+  "ranking": 1504396,
+  "activeDays": 47,
+  "lastUpdated": "2026-11-13T03:52:55Z",
   "submissionCalendar": {
     "1768867200": 14,
     "1768953600": 24,
@@ -54,6 +54,7 @@ window.LEETCODE_STATIC_DATA = {
     "1792368000": 7,
     "1792454400": 4,
     "1792713600": 25,
-    "1793664000": 2
+    "1793664000": 2,
+    "1794441600": 3
   }
 };
