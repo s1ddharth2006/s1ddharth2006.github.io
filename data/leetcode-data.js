@@ -5,9 +5,9 @@ window.LEETCODE_STATIC_DATA = {
   "easySolved": 99,
   "mediumSolved": 24,
   "hardSolved": 3,
-  "ranking": 1409944,
+  "ranking": 1410439,
   "activeDays": 49,
-  "lastUpdated": "2026-11-16T03:31:45Z",
+  "lastUpdated": "2026-11-17T05:30:00Z",
   "submissionCalendar": {
     "1768867200": 14,
     "1768953600": 24,
